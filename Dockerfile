@@ -145,6 +145,9 @@ RUN echo "Downloading checkpoints..."
 ##RUN wget -c https://huggingface.co/sberbank-ai/Real-ESRGAN/resolve/main/RealESRGAN_x4.pth -P ./models/upscale_models/ 
 
 RUN echo "Done"
+USER root
+RUN chown -R user:user /home/user/app/custom_nodes
+USER user
 
 # install custom nodes
 RUN echo "Installing custom nodes..." 
