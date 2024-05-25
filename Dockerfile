@@ -45,9 +45,10 @@ WORKDIR $HOME/app
 
 # Copy the current directory contents into the container at $HOME/app setting the owner to the user
 
-RUN git clone https://github.com/comfyanonymous/ComfyUI && git checkout 39e75862b248a20e8233ccee743ba5b2e977cdcf && \
-    pip install xformers!=0.0.18 --no-cache-dir -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu121
+# RUN git clone https://github.com/comfyanonymous/ComfyUI && git checkout 39e75862b248a20e8233ccee743ba5b2e977cdcf && \
+#    pip install xformers!=0.0.18 --no-cache-dir -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu121
 
+copy . .
 # Checkpoints
 
 RUN echo "Downloading checkpoints..."  
