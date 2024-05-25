@@ -5,6 +5,8 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 ARG USE_PERSISTENT_DATA
 
+RUN apt-get update && apt-get install -y sudo
+
 RUN apt-get update && apt-get install -y \
     git \
     make build-essential libssl-dev zlib1g-dev \
