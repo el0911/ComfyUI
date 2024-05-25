@@ -53,7 +53,7 @@ WORKDIR $HOME/app
 copy . .
 # Checkpoints
 
-RUN sudo chown -R user:user /home/user/app
+RUN chown -R user:user /home/user/app
 
 RUN echo "Downloading checkpoints..."  
 # SDXL
