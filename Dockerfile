@@ -54,7 +54,7 @@ WORKDIR $HOME/app
 COPY . /home/user/app
 
 # Set the correct permissions for the /home/user/app directory
-RUN chown -R user:user /home/user/app
+# RUN chown -R user:user /home/user/app
 
 
 RUN echo "Downloading checkpoints..."  
