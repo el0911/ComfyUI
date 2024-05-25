@@ -158,7 +158,6 @@ RUN cd custom_nodes && git clone https://github.com/Fannovel16/comfy_controlnet_
 RUN cd custom_nodes && git clone https://github.com/el0911/comfyui_controlnet_aux_el && cd comfyui_controlnet_aux_el && pip install -r requirements.txt
 RUN cd custom_nodes && git clone https://github.com/Extraltodeus/ComfyUI-AutomaticCFG  && cd ComfyUI-AutomaticCFG && pip install -r requirements.txt
 RUN cd custom_nodes && git clone https://github.com/Stability-AI/stability-ComfyUI-nodes && cd stability-ComfyUI-nodes && pip install -r requirements.txt 
-RUN cd custom_nodes && git clone https://github.com/Extraltodeus/ComfyUI-AutomaticCFG && cd ComfyUI-AutomaticCFG && pip install -r requirements.txt 
 RUN cd custom_nodes && git clone https://github.com/ltdrdata/ComfyUI-Impact-Pack && pip install -r requirements.txt 
 RUN cd custom_nodes && git clone https://github.com/EllangoK/ComfyUI-post-processing-nodes
  # ComfyUI Manager !!Important
