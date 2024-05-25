@@ -51,6 +51,8 @@ WORKDIR $HOME/app
 copy . .
 # Checkpoints
 
+RUN sudo chown -R user:user /home/user/app
+
 RUN echo "Downloading checkpoints..."  
 # SDXL
 RUN wget -c https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors -P ./models/checkpoints/ 
