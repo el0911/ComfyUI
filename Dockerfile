@@ -50,10 +50,12 @@ WORKDIR $HOME/app
 # RUN git clone https://github.com/comfyanonymous/ComfyUI && git checkout 39e75862b248a20e8233ccee743ba5b2e977cdcf && \
 #    pip install xformers!=0.0.18 --no-cache-dir -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu121
 
-copy . .
-# Checkpoints
+# Copy the current directory contents into the container at /home/user/app
+COPY . /home/user/app
 
+# Set the correct permissions for the /home/user/app directory
 RUN chown -R user:user /home/user/app
+
 
 RUN echo "Downloading checkpoints..."  
 # SDXL
