@@ -1,11 +1,9 @@
-FROM nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04 as base
+FROM nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive \
     TZ=America/Los_Angeles
 
 ARG USE_PERSISTENT_DATA
-
-RUN apt-get update && apt-get install -y sudo
 
 RUN apt-get update && apt-get install -y \
     git \
@@ -20,13 +18,18 @@ WORKDIR /code
 
 COPY ./requirements.txt /code/requirements.txt
 
-RUN useradd -m -u 1000 user
+
+# User
+USER root
+ENV HOME=/home/user \
+    PATH=/home/user/.local/bin:$PATH
 
 # Pyenv
 RUN curl https://pyenv.run | bash
 ENV PATH=$HOME/.pyenv/shims:$HOME/.pyenv/bin:$PATH
 
 ARG PYTHON_VERSION=3.10.12
+# Python
 RUN pyenv install $PYTHON_VERSION && \
     pyenv global $PYTHON_VERSION && \
     pyenv rehash && \
@@ -37,22 +40,13 @@ RUN pyenv install $PYTHON_VERSION && \
 
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
-# Create the necessary directory structure
-RUN mkdir -p /home/user/app/models /home/user/app/output
-
-# Copy the current directory contents into the container at /home/user/app
-COPY . /home/user/app
-
-# Change the ownership of everything inside /home/user/app
-RUN chown -R user:user /home/user/app
-
-FROM base as final
-
-# Switch to the user
-USER user
-
 # Set the working directory to /data if USE_PERSISTENT_DATA is set, otherwise set to $HOME/app
 WORKDIR $HOME/app
+
+COPY . .
+
+RUN  pip install opencv-python
+
 
 RUN echo "Done"
 
