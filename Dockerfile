@@ -23,9 +23,15 @@ COPY ./requirements.txt /code/requirements.txt
 RUN useradd -m -u 1000 user
 
 # Pyenv
-RUN curl https://pyenv.run | bash
-ENV PATH=$HOME/.pyenv/shims:$HOME/.pyenv/bin:$PATH
 
+# Install pyenv
+RUN curl https://pyenv.run | bash
+
+# Set up pyenv in the shell profile
+ENV PATH="/root/.pyenv/bin:$PATH"
+RUN echo 'eval "$(pyenv init --path)"' >> ~/.bashrc
+
+# Install Python with pyenv
 ARG PYTHON_VERSION=3.10.12
 RUN pyenv install $PYTHON_VERSION && \
     pyenv global $PYTHON_VERSION && \
@@ -34,6 +40,7 @@ RUN pyenv install $PYTHON_VERSION && \
     pip install --no-cache-dir \
     datasets \
     huggingface-hub "protobuf<4" "click<8.1"
+
 
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
