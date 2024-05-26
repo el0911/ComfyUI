@@ -23,15 +23,9 @@ COPY ./requirements.txt /code/requirements.txt
 RUN useradd -m -u 1000 user
 
 # Pyenv
-
-# Install pyenv
 RUN curl https://pyenv.run | bash
+ENV PATH=$HOME/.pyenv/shims:$HOME/.pyenv/bin:$PATH
 
-# Set up pyenv in the shell profile
-ENV PATH="/root/.pyenv/bin:$PATH"
-RUN echo 'eval "$(pyenv init --path)"' >> ~/.bashrc
-
-# Install Python with pyenv
 ARG PYTHON_VERSION=3.10.12
 RUN pyenv install $PYTHON_VERSION && \
     pyenv global $PYTHON_VERSION && \
@@ -40,7 +34,6 @@ RUN pyenv install $PYTHON_VERSION && \
     pip install --no-cache-dir \
     datasets \
     huggingface-hub "protobuf<4" "click<8.1"
-
 
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
@@ -63,7 +56,7 @@ WORKDIR $HOME/app
 
 RUN echo "Done"
 
-
+ 
 # Controlnet Preprocessor nodes by Fannovel16
 #RUN cd custom_nodes && git clone https://github.com/Fannovel16/comfy_controlnet_preprocessors && cd comfy_controlnet_preprocessors && python install.py --no_download_ckpts # this guy just deleted his repo
 RUN cd custom_nodes && git clone https://github.com/el0911/comfyui_controlnet_aux_el && cd comfyui_controlnet_aux_el && pip install -r requirements.txt
