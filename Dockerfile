@@ -46,6 +46,7 @@ WORKDIR $HOME/app
 COPY . .
 
 RUN  pip install opencv-python
+RUN pip install insightface
 
 
 RUN echo "Done"
