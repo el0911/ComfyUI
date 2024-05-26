@@ -45,6 +45,9 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 # Set the working directory to /data if USE_PERSISTENT_DATA is set, otherwise set to $HOME/app
 WORKDIR $HOME/app
 
+# Create the necessary directory structure
+RUN mkdir -p /home/user/app/models /home/user/app/output
+
 # Copy the current directory contents into the container at $HOME/app setting the owner to the user
 
 # RUN git clone https://github.com/comfyanonymous/ComfyUI && git checkout 39e75862b248a20e8233ccee743ba5b2e977cdcf && \
