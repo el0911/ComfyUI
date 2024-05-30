@@ -64,5 +64,5 @@ RUN cd custom_nodes && git clone https://github.com/ltdrdata/ComfyUI-Manager.git
 
 RUN echo "Done"
 
-CMD ["python", "main.py", "--listen", "0.0.0.0", "--port", "8188", "--output-directory", "${USE_PERSISTENT_DATA:+/data/}"]
+CMD ["python", "main.py", "--listen", "0.0.0.0", "--port", "8188", "--output-directory", "output"]
 
